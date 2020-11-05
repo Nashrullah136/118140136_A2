@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>118140136</title>
+</head>
+<body>
+    <header id="header">
+        <a href="#">
+            <img src="https://lh3.googleusercontent.com/proxy/MMrs_hNtvhczb3Zo7qZcM6tuSRqaJsh_onLvVVtCNiWmsJpDMuPrnvtE5wb-u6bXAtVbLjvG-I1w" alt="Header">
+        </a>
+    </header>
+    <nav id="menu">
+        <div id="menu-item">
+            <a href="#html">HTML</a>
+        </div>
+        <div id="menu-item">
+            <a href="#css">CSS</a>
+        </div>
+        <div id="menu-item">
+            <a href="#php">PHP</a>
+        </div>
+    </nav>
+    <section id="html">
+        <a href="#">
+            <p>
+                Hypertext Markup Language adalah bahasa markah standar untuk dokumen yang dirancang untuk ditampilkan di peramban internet. <br>
+                Ini dapat dibantu oleh teknologi seperti Cascading Style Sheets dan bahasa scripting seperti JavaScript dan VBScript.
+            </p>
+        </a>
+    </section>
+    <section id="css">
+        <a href="#">
+            <p>
+                Cascading Style Sheet merupakan aturan untuk mengatur beberapa komponen dalam sebuah web sehingga <br>
+                akan lebih terstruktur dan seragam. CSS bukan merupakan bahasa pemograman.
+            </p>
+        </a>
+    </section>
+    <section id="php">
+        <a href="#">
+            <p>
+                PHP: Hypertext Preprocessor adalah bahasa skrip yang dapat ditanamkan atau disisipkan ke dalam HTML. <br>
+                PHP banyak dipakai untuk memprogram situs web dinamis. PHP dapat digunakan untuk membangun sebuah CMS.
+            </p>
+        </a>
+    </section>
+    <footer>
+        <a href="#header">Copyrigth @2020</a>
+    </footer>
+</body>
+<style>
+    img{
+        width: 95vw; 
+        height: 30vh;
+        align-self: center;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    header > a{
+        cursor: default;
+    }
+    body{
+        margin: 0;
+    }
+    #header{
+        background-color: #dde5f2;
+        padding: 8pt;
+    }
+    #menu{
+        display: flex;
+        background-color: #a8b2bd;
+    }
+    #html:target{
+        background-color: yellow;
+    }
+    #css:target{
+        background-color: yellow;
+    }
+    #php:target{
+        background-color: yellow;
+    }
+    #header:target{
+        background-color: yellow;
+    }
+    section > a{
+        color: black;
+        text-decoration: none;
+        cursor: default;
+    }
+    #menu-item{
+        width: fit-content;
+        text-align: center;
+        margin: 5pt;
+    }
+    footer{
+        background-color: #92867b;  
+        text-align: center;
+    }
+</style>
+</html>
