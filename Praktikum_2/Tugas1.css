@@ -1,0 +1,66 @@
+.navbar {
+  background-color: #305f72;
+  position: fixed;
+  width: 100vw;
+}
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+}
+.navbar ul li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  padding: 20px 10px;
+}
+.navbar ul li a:hover {
+  background-color: #568ea6;
+  color: white;
+}
+
+body {
+  margin: 0;
+}
+
+.middle {
+  padding-top: 58px;
+  display: block;
+  background-color: #f0b7a4;
+}
+
+.content {
+  width: 70%;
+  background-color: #f1d1b5;
+  height: auto;
+  padding-top: 10pt;
+  padding-left: 10pt;
+  padding-right: 10pt;
+  margin-left: 15%;
+}
+.content :last-child {
+  margin-bottom: 0;
+}
+.content table {
+  margin: auto;
+}
+.content table td {
+  width: 200px;
+  height: 100px;
+}
+.content table td img {
+  width: inherit;
+  height: inherit;
+}
+
+.footer {
+  text-align: center;
+  background-color: #f18c8e;
+  overflow: hidden;
+  margin: 0;
+}
+
+/*# sourceMappingURL=Tugas1.css.map */
