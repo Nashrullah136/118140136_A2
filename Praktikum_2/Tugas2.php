@@ -1,0 +1,40 @@
+<?php
+    $a = 20;
+    $b = 5;
+
+    echo 'Penjumlahan';
+    echo '<br>';
+    echo 'Operator: +';
+    echo '<br>';
+    echo "Hasil: ".($a+$b);
+    echo '<br>';
+    echo '<br>';
+    echo 'Pengurangan';
+    echo '<br>';
+    echo 'Operator: -';
+    echo '<br>';
+    echo "Hasil: ". ($a-$b);
+    echo '<br>';
+    echo '<br>';
+    echo 'Perkalian';
+    echo '<br>';
+    echo 'Operator: *';
+    echo '<br>';
+    echo "Hasil: ".$a*$b;
+    echo '<br>';
+    echo '<br>';
+    echo 'Pembagian';
+    echo '<br>';
+    echo 'Operator: /';
+    echo '<br>';
+    echo "Hasil: ".$a/$b;
+    echo '<br>';
+    echo '<br>';
+    echo 'Modulus';
+    echo '<br>';
+    echo 'Operator: %';
+    echo '<br>';
+    echo "Hasil: ".$a%$b;
+    echo '<br>';
+    echo '<br>';
+?>

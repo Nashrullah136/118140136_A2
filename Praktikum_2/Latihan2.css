@@ -1,0 +1,26 @@
+.sidebar {
+  float: left;
+  height: auto;
+  width: 300px;
+  background-color: #f1f1f1;
+}
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  width: 200px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+.sidebar li a {
+  display: block;
+  color: #000;
+  padding: 10px 16px;
+  width: 250px;
+  text-decoration: none;
+}
+.sidebar li a:hover {
+  background-color: #555;
+  color: white;
+}
+
+/*# sourceMappingURL=Latihan2.css.map */
