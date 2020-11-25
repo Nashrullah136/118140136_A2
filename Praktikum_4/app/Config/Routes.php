@@ -20,7 +20,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /**
  * --------------------------------------------------------------------
@@ -30,7 +30,21 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Article::index', ['as' => 'home']);
+$routes->get('/article/(:num)', 'Article::read/$1', ['as' => 'read']);
+$routes->get('/login', 'Authenticate::login', ['as' => 'login']);
+$routes->get('/register', 'Authenticate::register_form', ['as' => 'register']);
+$routes->post('/login', 'Authenticate::auth', ['as' => 'auth']);
+$routes->post('/register', 'Authenticate::register', ['as' => 'register_post']);
+$routes->get('/logout', 'Authenticate::logout', ['as' => 'logout']);
+$routes->group('/article', ['filter' => 'auth'], function ($routes){
+	$routes->get('/', 'Article::dashboard', ['as' => 'dashboard']);
+	$routes->get('update/(:num)', 'Article::update_form/$1', ['as' => 'update']);
+	$routes->get('create', 'Article::create_form', ['as' => 'create']);
+	$routes->post('delete/(:num)', 'Article::delete/$1', ['as' => 'delete']);
+	$routes->post('update/(:num)', 'Article::update/$1', ['as' => 'update_post']);
+	$routes->post('create', 'Article::create', ['as' => 'create_post']);
+});
 
 /**
  * --------------------------------------------------------------------

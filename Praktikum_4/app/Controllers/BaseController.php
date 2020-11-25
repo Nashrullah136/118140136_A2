@@ -14,6 +14,8 @@ namespace App\Controllers;
  * @package CodeIgniter
  */
 
+use App\Models\Article;
+use App\Models\User;
 use CodeIgniter\Controller;
 
 class BaseController extends Controller
@@ -27,7 +29,8 @@ class BaseController extends Controller
 	 * @var array
 	 */
 	protected $helpers = [];
-
+	protected $user;
+	protected $article;
 	/**
 	 * Constructor.
 	 */
@@ -35,7 +38,8 @@ class BaseController extends Controller
 	{
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
-
+		$this->user = new User();
+		$this->article = new Article();
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
