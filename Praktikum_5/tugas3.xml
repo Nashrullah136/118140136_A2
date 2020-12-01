@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<dataDiri>
+    <nama>
+        <awal>Muhammad</awal>
+        <akhir>Nashrullah</akhir>
+    </nama>
+    
+    <jeniskelamin>Laki-laki</jenisKelamin>
+
+    <alamat>
+        <kabupaten>Bandar Lampung</kabupaten>
+        <provinsi>Lampung</provinsi>
+        <negara>Indonesia</negara>
+    </alamat>
+
+    <sosialMedia>
+        <github>Nashrullah136</github>
+    </sosialMedia>
+</dataDiri>
