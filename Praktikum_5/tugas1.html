@@ -46,7 +46,7 @@
         document.getElementById(id).remove();
     }
     function edit(id) {
-        var nama = prompt("Masukkan nama baru: ", document.getElementById(id).innerText);
+        var nama = prompt("Masukkan nama baru: ", document.getElementById(id).innerText.split(" | ")[0]);
         if (nama != null) {
             var li = document.getElementById(id);
             li.innerHTML = "";
