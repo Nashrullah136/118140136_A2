@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas AJAX</title>
+</head>
+<style>
+    .item-form {
+        margin-bottom: 7px;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .topnav {
+      overflow: hidden;
+      height: 50px;
+      display: flex;
+    }
+    .topnav .menu{
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 4px;
+    }
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    #myBtn{
+        width: fit-content;
+        height: fit-content;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 5px;
+    }
+</style>
+<script>
+    var before;
+    var selection;
+    var i = 1;
+    window.onclick = function(event) {
+        var modal =  document.getElementById("myModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    window.onload = function(){
+        get_jurusan();
+        get_data(1);
+        var temp = selection.cloneNode(true);
+        temp.setAttribute("onchange", "get_data(this.value)");
+        temp.setAttribute("id", "pos");
+        document.querySelector(".menu").appendChild(temp);
+        var temp2 = selection.cloneNode(true);
+        temp2.setAttribute("id", "form_selection");
+        document.querySelector("#form-selection").appendChild(temp2);
+    };
+    function f_selection(data) {
+        var sel = document.createElement("select");
+        data.forEach(obj =>{
+            var opt = document.createElement("option");
+            opt.setAttribute("value", obj.id_jur);
+            opt.textContent = obj.nama;
+            sel.appendChild(opt);
+        });
+        return sel;
+    }
+    function mk_td(nama, id, column) {
+        var td = document.createElement("td");
+        td.setAttribute("data-id", id);
+        td.setAttribute("data-column", column);
+        td.setAttribute("contenteditable", "true");
+        td.setAttribute("onfocusin", "text_before()");
+        td.setAttribute("onfocusout", "text_after()");
+        td.append(nama);
+        return td;
+    }
+    function table_header(table) {
+        // var table = document.createElement("table");
+        var nama = ["No.", "NIM", "Nama", "Prodi","Aksi"];
+        var tr = document.createElement("tr");
+        nama.forEach(element => {
+            var th = document.createElement("th");
+            th.textContent = element;
+            tr.appendChild(th);
+        });
+        table.appendChild(tr);
+    }
+    function text_before() {
+        console.log(event.target);
+        before = event.target.innerText;
+    }
+    function text_after() {
+        var target = event.target;
+        var after = target.innerText;
+        var id = target.dataset.id;
+        var column = target.dataset.column;
+        var temp_before = before;
+        // if(target.dataset.column == "id" && )
+        if(after != before){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    // var data = JSON.parse(this.responseText);
+                    // selection = f_selection(data);
+                }
+            };
+            xhttp.open("POST", "update.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            var j = JSON.stringify({
+                data: after,
+                id: id,
+                column: column
+            });
+            xhttp.send("data="+j);
+        }
+        // console.log(target.dataset.id);
+        // console.log(target.dataset.column);
+        // console.log(before);
+        // console.log(after);
+    }
+    function  erase() {
+        event.preventDefault();
+        var id = JSON.stringify({
+            id: event.target.dataset.id
+        });
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+                ref();
+            }
+        };
+        xhttp.open("POST", "delete.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("data="+id);
+    }
+    function get_data(prodi) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var table = document.getElementById("main");
+                table.innerHTML = "";
+                table_header(table);
+                var data = JSON.parse(this.responseText);
+                console.log(data);
+                data.forEach(obj =>{
+                    var tr = document.createElement("tr");
+                    tr.setAttribute("id", obj.id);
+                    var td1 = document.createElement(td1);
+                    td1.append(i++);
+                    tr.appendChild(td1);
+                    var td = document.createElement("td");
+                    tr.appendChild(mk_td(obj.nim, obj.id, "nim"));
+                    tr.appendChild(mk_td(obj.nama, obj.id, "nama"));
+                    td.innerHTML = '';
+                    var temp = selection.cloneNode(true);
+                    temp.setAttribute("data-id", obj.id);
+                    temp.setAttribute("onchange", "edit(this.value)");
+                    temp.value = obj.prodi;
+                    tr.appendChild(td.appendChild(temp));
+                    td.innerHTML = '';
+                    var a = document.createElement("a");
+                    a.setAttribute("onclick", "erase()");
+                    a.setAttribute("data-id", obj.id);
+                    a.setAttribute("href", "");
+                    a.textContent = "Delete";
+                    td.appendChild(a);
+                    tr.appendChild(td);
+                    table.appendChild(tr);
+                });
+            }
+        };
+        xhttp.open("GET", "get.php?prodi="+prodi, true);
+        xhttp.send();
+    }
+    function get_jurusan() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                console.log(data);
+                selection = f_selection(data);
+            }
+        };
+        xhttp.open("GET", "get_jurusan.php", false);
+        xhttp.send();
+    }
+    function tambah() {
+        var nama = document.getElementById("_nama").value;
+        var nim = document.getElementById("_nim").value;
+        var prodi = document.getElementById("form_selection").value;
+        var data = {
+            nama: nama,
+            nim: nim,
+            prodi: prodi
+        };
+        if(nama == "" || nim == ""){
+            alert("Semua baris harus di isi!");
+            return;
+        }
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+                // var data = JSON.parse(this.responseText);
+                // selection = f_selection(data);
+                ref();
+            }
+        };
+        xhttp.open("POST", "add.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        var j = JSON.stringify(data);
+        xhttp.send("data="+j);
+        document.getElementById('myModal').style.display = 'none'
+    }
+    function ref() {
+        i = 1;
+        event.preventDefault();
+        get_data(document.getElementById("pos").value);
+    }
+</script>
+<body>
+    <div class="topnav">
+        <div class="menu">
+            Prodi :
+        </div>
+        <button id="myBtn" onfocus="document.getElementById('myModal').style.display = 'block'">Tambah Data</button>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+              <span class="close" onclick="document.getElementById('myModal').style.display = 'none'">&times;</span>
+              <div class="item-form">
+                  Nama   :  <input type="text" name="_nama" id="_nama"><br>
+              </div>
+              <div class="item-form">
+                  NIM    : <input type="text" name="_nim" id="_nim"><br>
+              </div>
+              <div id="form-selection" class="item-form">
+                  Prodi  : 
+              </div>
+              <button type="submit" onclick="tambah()">Tambah</button>
+            </div>
+          </div>
+        <a href onclick="ref()" style="margin-top: auto; margin-bottom: auto; margin-left: 5px;">Refresh</a>
+    </div>
+    <hr style="margin-top: 0cm;">
+    <table id="main">
+
+    </table>
+</body>
+</html>
